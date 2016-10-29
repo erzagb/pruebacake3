@@ -1,96 +1,86 @@
-<script src="http://momentjs.com/downloads/moment-with-locales.js"></script>
-<script src="http://momentjs.com/downloads/moment-timezone-with-data.js"></script>
-
-
-<div class="container">
+	<div class="container">
 	<div class="row">
-		<h2>Lista de profesores</h2>
-	</div>
-    <form class="form-horizontal">
-<fieldset>
+			<div class="col-md-6 col-md-offset-3">
+					<div class="page-header">
+						<font color="green">
+							<h2><?php echo __('Ver Profesor'); ?></h2>
+						</font>
+					</div>
+					<?php echo $this->Form->create(null,['url'=>['controller'=>'Profesor','action'=>'view']]);?>
+					
+				    <!-- Text input-->
+                   <div class="col-md-6 col-md-offset-0">
+				        <form action="#" class="col-md-6 col-xs-offset-0">
+                         <div class="input-group">
+                           <input type="text" class="form-control" name="x" placeholder="cédula del profesor">
+                            <span class="input-group-btn">
+                            <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-search"></span></button>
+                            </span>
+                         </div>
+                         </form>
+                         <br>
+                         <br>
+         
+         	      </div>
 
-<br>
-<!-- Text input-->
-<div class="form-group">
-    
-        <div class="col-md-4 col-xs-offset-0">
-          <label class="col-md-4 control-label" for="NP">Cédula del Profesor</label>  
-          <div class="col-md-6">
-              <input id="np" name="Cedula del profesor" placeholder="cedula" class="form-control input-md" required="" type="text">
-          </div>
-        </div>
-      
-  
-</div>
+					<fieldset>
+				</div>
+				
 
-<!-- seccion tabla -->
-<div class="container">
-        <br><br>
+<div class="col-md-6 col-md-offset-3">
         <!--table-->
+        <br><br>
        <table class="table table-striped">
        <thead>
             <tr class="info">
                 <th>Seleccionar</th>
-                <th>Cedula</th>
-                <th>Codigo</th>
-                <th>Nombre y apellidos</th>
+                <th>Cédula</th>
+                <th>Código del profesor</th>
+                <th>Nombre y Apellidos</th>
             </tr>
         </thead>
         <tbody>
             <tr>
         <!--first example-->
             <td><input id="checkbox1" type="checkbox"></td>
-            <td>X-XXX-XXXX</td>
-            <td>XXXXX</td>
-            <td>José</td>
+            <td>111234568</td>
+            <td>234</td>
+            <td>Daniel Ramírez Alfaro</td>
         </tr>
         <tr>
         <!--second example-->
             <td><input id="checkbox1" type="checkbox"></td>
-            <td>X-XXX-XXXX</td>
-            <td>XXXXX</td>
-            <td>Daniel</td>
+            <td>678451230</td>
+            <td>235</td>
+            <td>Orlando Gómez López</td>
         </tr>
         <tr>
         <!--third example-->
             <td><input id="checkbox1" type="checkbox"></td>
-            <td>X-XXX-XXXX</td>
-            <td>XXXXX</td>
-            <td>Karol</td>
+            <td>542103078</td>
+            <td>236</td>
+            <td>Nicole Hidalgo Corrales</td>
         </tr>
         </tbody>
     </table>
-    </div>
-
-<!-- Button (Double) -->
-<div class="form-group">
-     <div class="col-md-2 col-xs-offset-0">
-      <label class="col-md-8 control-label" for="button1id"></label>
-      <div class="col-md-4">
-        <button id="button1id" name="button1id" class="btn btn-success">Ver Perfil</button>
-      </div>
-     </div>
-     
-      <div class="col-md-2 col-xs-offset-0">
-          <label class="col-md-8  control-label" for="button1id"></label>
-          <div class="col-md-4">
-            <button id="button1id" name="button1id" class="btn btn-success">Exportar lista</button>
-          </div>
-      </div>
+  </div>
   
-</div>
 
-<!-- Multiple Checkboxes (inline) -->
-<div class="form-group">
-  <div class="col-md-4"></div>
+	<div class="col-md-6 col-md-offset-3">
+					<br>
+				</fieldset>
+				<div class="form-group">
+  <label class="col-md-4 control-label" for="button1id"></label>
+  <div class="col-md-12">
+    <button id="button1id" name="button1id" class="btn btn-success">Ver Perfil</button>
+    
+    <button id="cancel" name="cancelar" class="btn btn-primary">Exportar Lista</button>
+  </div>
 </div>
-
-<!-- Multiple Checkboxes (inline) -->
-<div class="form-group">
-  <div class="col-md-4"></div>
-</div>
-
-</fieldset>
-</form>
-
-</div>
+				<?= $this->Form->end() ?>
+			  <br>
+				<br>
+			</div>
+			<?php echo $this->Form->end();?>
+	</div>
+	</div>

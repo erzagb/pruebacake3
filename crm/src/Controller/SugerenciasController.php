@@ -2,6 +2,7 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
+use Cake\ORM\TableRegistry;
 
 /**
  * Sugerencias Controller
@@ -69,20 +70,48 @@ class SugerenciasController extends AppController
      */
     public function add()
     {
-        $sugerencia = $this->Sugerencias->newEntity();
-        if ($this->request->is('post')) {
-            $sugerencia = $this->Sugerencias->patchEntity($sugerencia, $this->request->data);
-            if ($this->Sugerencias->save($sugerencia)) {
-                $this->Flash->success(__('The sugerencia has been saved.'));
+       $sugerencia = TableRegistry::get('sugerencias');
+        //Se hacen tantas querys como inserts se necesiten hacer,por ejemplo $query2 = $profesor->query3();  $query3 = $sedes->query3();
+        $query = $sugerencia->query();
+        
+        
+        $tipo= $this->request->data('tipo');
+        $Colegiado= $this->request->data('nombre');
+        $carne= $this->request->data('carne');
+        $fecha= $this->request->data('fecha');
+        $sede= $this->request->data('sede');
+        $curso= $this->request->data('curso');
+        $profesor= $this->request->data('profesor');
+        $descripcion= $this->request->data('descripcion')
+        ;
+        
+         //  $query->insert(['codigo_profesor','codigo_colegiado', 'codigo_sede','codigo_curso','tipo','fecha','descripcion'])
+        $query->insert(['tipo','fecha','descripcion'])
+        ->values([
+        'codigo_profesor'=>'',//$profesor
+        'codigo_colegiado'=>'', //$carne
+        'codigo_sede'=>'',//$sede
+        'codigo_curso'=>'',//$curso
+        'tipo'=>$tipo,
+        'fecha'=>$fecha,
+        'descripcion'=>$descripcion
+        ])
+        
+        
+        
+    ->execute();
+          
+    if ($query) {
+                $this->Flash->success(__('La sugerencia ha sido agregada.'));
 
-                return $this->redirect(['action' => 'index']);
+                return $this->redirect(['action' => 'add']);
             } else {
-                $this->Flash->error(__('The sugerencia could not be saved. Please, try again.'));
+                $this->Flash->error(__('La sugerencia no se ha podido almacenar. Por favor,intente de nuevo.'));
             }
-        }
-        $this->set(compact('sugerencia'));
-        $this->set('_serialize', ['sugerencia']);
+    
+        
     }
+    
 
     /**
      * Edit method

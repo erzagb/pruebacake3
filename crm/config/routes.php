@@ -49,7 +49,7 @@ Router::scope('/', function (RouteBuilder $routes) {
      * its action called 'display', and we pass a param to select the view file
      * to use (in this case, src/Template/Pages/home.ctp)...
      */
-    $routes->connect('/', ['controller' => 'Pages', 'action' => 'display', 'home']);
+    $routes->connect('/users', ['controller' => 'Users', 'action' => 'display', 'login']);
 
     /**
      * ...and connect the rest of 'Pages' controller's URLs.
@@ -85,7 +85,7 @@ Router::scope('/users', function($routes){
 });
 
 Router::scope('/cursos', function($routes){
-    $routes->connect('/add', ['controller'=>'cursos', 'action'=>'add']);
+    $routes->connect('/agregar', ['controller'=>'cursos', 'action'=>'agregar']);
     $routes->connect('/editar', ['controller'=>'cursos', 'action'=>'editar']);
     $routes->connect('/ver', ['controller'=>'cursos', 'action'=>'ver']);
 });
@@ -93,14 +93,14 @@ Router::scope('/cursos', function($routes){
 Router::scope('/colegiado', function($routes){
     $routes->connect('/agregar', ['controller'=>'colegiado', 'action'=>'agregar']);
     $routes->connect('/editar', ['controller'=>'colegiado', 'action'=>'editar']);
-    $routes->connect('/editar', ['controller'=>'colegiado', 'action'=>'eliminar']);
+    $routes->connect('/eliminar', ['controller'=>'colegiado', 'action'=>'eliminar']);
     $routes->connect('/ver', ['controller'=>'colegiado', 'action'=>'ver']);
 });
 
 Router::scope('/profesor', function($routes){
     $routes->connect('/agregar', ['controller'=>'profesor', 'action'=>'agregar']);
     $routes->connect('/editar', ['controller'=>'profesor', 'action'=>'editar']);
-    $routes->connect('/editar', ['controller'=>'profesor', 'action'=>'eliminar']);
+    $routes->connect('/eliminar', ['controller'=>'profesor', 'action'=>'eliminar']);
     $routes->connect('/ver', ['controller'=>'profesor', 'action'=>'ver']);
 });
 
@@ -110,19 +110,19 @@ Router::scope('/sedes', function($routes){
     $routes->connect('/ver', ['controller'=>'sedes', 'action'=>'ver']);
 });
 
-Router::scope('/sedes', function($routes){
+Router::scope('/quejas', function($routes){
     $routes->connect('/agregar', ['controller'=>'quejas', 'action'=>'agregar']);
     $routes->connect('/editar', ['controller'=>'quejas', 'action'=>'editar']);
     $routes->connect('/ver', ['controller'=>'quejas', 'action'=>'ver']);
 });
 
-Router::scope('/sedes', function($routes){
+Router::scope('/sugerencias', function($routes){
     $routes->connect('/agregar', ['controller'=>'sugerencias', 'action'=>'agregar']);
     $routes->connect('/editar', ['controller'=>'sugerencias', 'action'=>'editar']);
     $routes->connect('/ver', ['controller'=>'sugerencias', 'action'=>'ver']);
 });
 
-Router::scope('/sedes', function($routes){
+Router::scope('/registrodeLlamadas', function($routes){
     $routes->connect('/agregar', ['controller'=>'registrodeLlamadas', 'action'=>'agregar']);
     $routes->connect('/editar', ['controller'=>'registrodeLlamadas', 'action'=>'editar']);
     $routes->connect('/ver', ['controller'=>'registrodeLlamadas', 'action'=>'ver']);

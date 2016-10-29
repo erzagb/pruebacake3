@@ -2,7 +2,7 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
-
+use Cake\ORM\TableRegistry;
 /**
  * Cursos Controller
  *
@@ -26,12 +26,12 @@ class CursosController extends AppController
         $this->set('_serialize', ['cursos']);
     }
     
-    /*public function agregar()
+    public function agregar()
     {
         $user = $this->Cursos->newEntity();
        
        $this->set(compact('cursos'));
-    }*/
+    }
     
       public function editar()
     {
@@ -73,25 +73,38 @@ class CursosController extends AppController
      */
     public function add()
     {
-        $curso = $this->Cursos->newEntity();
+    
+        $curso = TableRegistry::get('cursos');
+        //Se hacen tantas querys como inserts se necesiten hacer,por ejemplo $query2 = $profesor->query3();  $query3 = $sedes->query3();
+        $query = $curso->query();
         
-        if ($this->request->is('post') || $this->request->is('put')) {
-            
-            $curso = $this->Cursos->patchEntity($curso, $this->request->data);
-              
-            if ($this->Cursos->save($curso)) {
-                $this->Flash->success('Curso guardado');
-                return $this->redirect(['controller'=>'cursos', 'action'=>'agregar']);
-                
+        
+        $codigocurso = $this->request->data('Cod_del_curso');
+        $nombreCurso= $this->request->data('Nombre_del_curso');
+        $horario= $this->request->data('Horario_del_curso');
+        $cupo= $this->request->data('cupo');
+        $costo= $this->request->data('costo');
+        
+          if ($codigocurso != ''){//Condicion que valida que llave primaria no sea null
+        $query->insert(['codigo_curso','nombre_curso', 'horario','cupo','costo'])
+        ->values([
+        'codigo_curso'=>$codigocurso,
+        'nombre_curso'=>$nombreCurso,
+        'horario'=>$horario,
+        'cupo'=>$cupo,
+        'costo'=>$costo
+        ])
+    ->execute();
+    
+        if ($query) {
+                $this->Flash->success(__('El curso ha sido agregado.'));
+
+                return $this->redirect(['action' => 'add']);
             } else {
-                $this->Flash->error('No se pudo guardar el curso en la base de datos');
-                 //$this->redirect(['controller'=>'cursos', 'action'=>'agregar']);
-                //debug($curso);
-               
-                 
+                $this->Flash->error(__('TEl curso no se ha podido almacenar. Por favor,intente de nuevo.'));
             }
-        }
-        $this->set(compact('curso'));
+    }
+        
     }
   
     	

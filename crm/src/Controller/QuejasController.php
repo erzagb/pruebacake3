@@ -71,19 +71,42 @@ class QuejasController extends AppController
      */
     public function add()
     {
-        $queja = $this->Quejas->newEntity();
-        if ($this->request->is('post')) {
-            $queja = $this->Quejas->patchEntity($queja, $this->request->data);
-            if ($this->Quejas->save($queja)) {
-                $this->Flash->success(__('The queja has been saved.'));
+       $queja = TableRegistry::get('quejas');
+        //Se hacen tantas querys como inserts se necesiten hacer,por ejemplo $query2 = $profesor->query3();  $query3 = $sedes->query3();
+        $query = $queja->query();
+        
+        
+        $Colegiado= $this->request->data('nombreColegiado');
+        $carne= $this->request->data('carne');
+        $tipo= $this->request->data('tipo');
+        $codigoProfesor= $this->request->data('codigoProfesor');
+        $codigoCurso= $this->request->data('curso');
+        $descripcion= $this->request->data('descripcion')
+        ;
+        
+         
+         $query->insert(['codigo_colegiado','codigo_profesor', 'codigo_curso','tipo','descripcion'])
+        ->values([
+        'codigo_profesor'=>$codigoProfesor,
+        'codigo_colegiado'=>$carne,
+        'codigo_curso'=>$codigoCurso,
+        'tipo'=>$tipo,
+        'descripcion'=>$descripcion
+        ])
+        
+        
+        
+    ->execute();
+          
+    if ($query) {
+                $this->Flash->success(__('La queja ha sido agregada.'));
 
-                return $this->redirect(['action' => 'index']);
+                return $this->redirect(['action' => 'add']);
             } else {
-                $this->Flash->error(__('The queja could not be saved. Please, try again.'));
+                $this->Flash->error(__('La queja no se ha podido almacenar. Por favor,intente de nuevo.'));
             }
-        }
-        $this->set(compact('queja'));
-        $this->set('_serialize', ['queja']);
+    
+        
     }
 
     /**

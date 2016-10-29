@@ -1,27 +1,28 @@
-<script src="http://momentjs.com/downloads/moment-with-locales.js"></script>
-<script src="http://momentjs.com/downloads/moment-timezone-with-data.js"></script>
-
-
-<div class="container">
+	<div class="container">
 	<div class="row">
-		<h2>Ver Curso</h2>
-	</div>
-    <form class="form-horizontal">
-<fieldset>
-
-<br>
+			<div class="col-md-6 col-md-offset-3">
+					<div class="page-header">
+						<font color="green">
+							<h2><?php echo __('Ver Cursos'); ?></h2>
+						</font>
+					</div>
+					<?php echo $this->Form->create(null,['url'=>['controller'=>'Cursos','action'=>'view']]);?>
+					
+					<fieldset>
+				</div>
+				
 <!-- Text input-->
-<div class="form-group">
+<div class="col-md-8 col-md-offset-2">
     
         <div class="col-md-4 col-xs-offset-0">
-          <label class="col-md-4 control-label" for="NP">Nombre del Profesor</label>  
+          <label class="col-md-6 control-label" for="NP">Nombre del Profesor</label>  
           <div class="col-md-6">
               <input id="np" name="Nombre del profesor" placeholder="Nombre" class="form-control input-md" required="" type="text">
           </div>
         </div>
  
         <div class="col-md-4 col-xs-offset-0">
-          <label class="col-md-4 control-label" for="Cat">Categoría</label>
+          <label class="col-md-4 col-xs-offset-1" for="Cat">Categoría</label>
           <div class="col-md-6">
             <select id="cat" name="categoria" class="form-control">
             <option value="1">Derecho Civil</option> 
@@ -51,9 +52,9 @@
           </div>
         </div>
 
-        <div class="col-md-4 col-xs-offset-0">
-          <label class="col-md-2 control-label" for="Sede">Sede</label>
-          <div class="col-md-6">
+        <div class="col-md-4 ">
+          <label class="col-md-6 control-label" for="Sede">Sede</label>
+          <div class="col-md-6 col-xs-offset-0">
             <select id="Sede" name="Sede" class="form-control">
             <option value="1">San José</option>
             <option value="2">Cartago</option>
@@ -68,11 +69,10 @@
   
 </div>
 
-<!-- seccion tabla -->
-<div class="container">
-        <br><br>
+<div class="col-md-6 col-md-offset-3">
         <!--table-->
-       <table class="table table-striped">
+        <br><br>
+      <table class="table table-striped">
        <thead>
             <tr class="info">
                 <th>Seleccionar</th>
@@ -113,37 +113,23 @@
         </tr>
         </tbody>
     </table>
-    </div>
-
-<!-- Button (Double) -->
-<div class="form-group">
-     <div class="col-md-2 col-xs-offset-0">
-      <label class="col-md-8 control-label" for="button1id"></label>
-      <div class="col-md-4">
-        <button id="button1id" name="button1id" class="btn btn-success">Ver</button>
-      </div>
-     </div>
-     
-      <div class="col-md-2 col-xs-offset-0">
-          <label class="col-md-8  control-label" for="button1id"></label>
-          <div class="col-md-4">
-            <button id="button1id" name="button1id" class="btn btn-success">Exportar lista</button>
-          </div>
-      </div>
+  </div>
   
+	<div class="col-md-6 col-md-offset-3">
+					<br>
+				</fieldset>
+				<div class="form-group">
+  <label class="col-md-4 control-label" for="button1id"></label>
+  <div class="col-md-8">
+    <button id="button1id" name="button1id" class="btn btn-success">Ver</button>
+    
+    <button id="cancel" name="cancelar" class="btn btn-primary">Exportar Lista</button>
+  </div>
 </div>
-
-<!-- Multiple Checkboxes (inline) -->
-<div class="form-group">
-  <div class="col-md-4"></div>
-</div>
-
-<!-- Multiple Checkboxes (inline) -->
-<div class="form-group">
-  <div class="col-md-4"></div>
-</div>
-
-</fieldset>
-</form>
-
-</div>
+				<?= $this->Form->end() ?>
+			  <br>
+				<br>
+			</div>
+			<?php echo $this->Form->end();?>
+	</div>
+	</div>

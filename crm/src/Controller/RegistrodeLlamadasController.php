@@ -2,6 +2,7 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
+use Cake\ORM\TableRegistry;
 
 /**
  * RegistrodeLlamadas Controller
@@ -52,6 +53,8 @@ class RegistrodeLlamadasController extends AppController
      * @return \Cake\Network\Response|null
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
+     
+     /**
     public function view($id = null)
     {
         $registrodeLlamada = $this->RegistrodeLlamadas->get($id, [
@@ -61,6 +64,7 @@ class RegistrodeLlamadasController extends AppController
         $this->set('registrodeLlamada', $registrodeLlamada);
         $this->set('_serialize', ['registrodeLlamada']);
     }
+    */
 
     /**
      * Add method
@@ -69,6 +73,42 @@ class RegistrodeLlamadasController extends AppController
      */
     public function add()
     {
+        $registrodeLlamada = TableRegistry::get('registro_llamadas');
+        $colegiado = TableRegistry::get('colegiados');
+        $sede = TableRegistry::get('sedes');
+        
+        $query = $registrodeLlamada->query();
+        
+        $carne = $this->request->data('carne');
+        $categoria = $this->request->data('CategoriaColegiado');
+        $sede = $this->request->data('Sede');
+        $fecha = $this->request->data('registration_date');
+        $contestado = $this->request->data('contesto');
+        $llamar = $this->request->data('llamar');
+        $comentario = $this->request->data('ComRegistro');
+        
+        $query->insert(['carne_colegiado', 'categoria_colegiado', 'sede', 'fecha_llamada', 'llamo', 'volver_llamar', 'descripcion'])
+        ->values([
+            'carne_colegiado' => $carne,
+            'categoria_colegiado' => $categoria,
+            'sede' => $sede,
+            'fecha_llamada' => $fecha,
+            'llamo' => $contestado,
+            'volver_llamar' => $llamar,
+            'descripcion' => $comentario,
+        ])
+        ->execute();
+        
+        if($query){
+            $this->Flash->success(__('El registro de llamada ha sido almacenado.'));
+
+                return $this->redirect(['action' => 'agregar']);
+            } else {
+                $this->Flash->error(__('El registro de llamada no pudo ser almacenado. Por favor intente de nuevo.'));
+            }
+        }
+        
+        /**
         $registrodeLlamada = $this->RegistrodeLlamadas->newEntity();
         if ($this->request->is('post')) {
             $registrodeLlamada = $this->RegistrodeLlamadas->patchEntity($registrodeLlamada, $this->request->data);
@@ -82,8 +122,10 @@ class RegistrodeLlamadasController extends AppController
         }
         $this->set(compact('registrodeLlamada'));
         $this->set('_serialize', ['registrodeLlamada']);
+        */
     }
 
+    
     /**
      * Edit method
      *
@@ -91,6 +133,8 @@ class RegistrodeLlamadasController extends AppController
      * @return \Cake\Network\Response|void Redirects on successful edit, renders view otherwise.
      * @throws \Cake\Network\Exception\NotFoundException When record not found.
      */
+     
+    /**
     public function edit($id = null)
     {
         $registrodeLlamada = $this->RegistrodeLlamadas->get($id, [
@@ -117,6 +161,8 @@ class RegistrodeLlamadasController extends AppController
      * @return \Cake\Network\Response|null Redirects to index.
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
+     
+    /**
     public function delete($id = null)
     {
         $this->request->allowMethod(['post', 'delete']);
@@ -129,4 +175,5 @@ class RegistrodeLlamadasController extends AppController
 
         return $this->redirect(['action' => 'index']);
     }
-}
+    */
+
